@@ -1,9 +1,10 @@
 import React from 'react';
-import { Dimensions, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from '@rneui/themed';
 import { Icon } from '@rneui/themed';
 import Number from './Number'
 import { pedido_props } from '../interface/inter';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -12,9 +13,20 @@ export default class Pedido extends React.Component<pedido_props> {
    
 
     const handlePress = () => {
-      //clicar redireciona para os itens do pedido e passa as propriedades
-        this.props.navigation?.navigate('Pedido',{ id:this.props.id,numero_mesa: this.props.numero_mesa, image_on: this.props.image_on, name_on:this.props.name_on, styles:this.props.styles})
-    };
+    //clicar redireciona para os itens do pedido e passa as propriedades
+      this.props.navigation?.navigate('Pedido',{ 
+        id:this.props.id,
+        numero_mesa: this.props.numero_mesa, 
+        image_on: this.props.image_on, 
+        name_on:this.props.name_on,
+        rua : this.props.rua,
+        numero:this.props.numero,
+        pegar_local:this.props.pegar_local,
+        pix:this.props.pix,
+        cartao:this.props.cartao,
+        dinheiro:this.props.dinheiro
+        })
+  };
 
     // ususario ou mesa como retorno da const 
     const userormesa = this.props.numero_mesa?
@@ -39,7 +51,7 @@ export default class Pedido extends React.Component<pedido_props> {
     const username = this.props.name_on?<Text style={this.props.styles?styles.textindex0:styles.text}>{this.props.name_on}</Text>:null
       // styles diz se esta em primeiro ou nao na ordem de pedidos || refere a cor pois o primeiro item o funco é branco e o restante é preto ...
     const icon_lanche = this.props.styles ?
-     <Avatar size={60} source={require('../assets/image/porcao.png')} 
+     <Avatar size={60} source={require('../assets/image/lanche.png')} 
      containerStyle={{
        position:'absolute',
        bottom:5,

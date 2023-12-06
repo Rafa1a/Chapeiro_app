@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -10,6 +9,7 @@ import {
   Dimensions
 } from 'react-native';
 import { Avatar } from '@rneui/themed';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 // header de Pedidos simples
@@ -17,7 +17,7 @@ export default class Header extends React.Component <any>{
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>Porções</Text>
+        <Text style={styles.text}>Chapeiro</Text>
       </SafeAreaView>
     );
   }

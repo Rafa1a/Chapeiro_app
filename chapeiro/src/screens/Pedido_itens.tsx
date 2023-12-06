@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,21 +9,36 @@ import Header_pedido from '../components/Header_Pedido';
 import Lista from '../components/Lista_Pedido'
 import { connect } from 'react-redux';
 import {fetchatualizar_pedido} from '../store/action/pedidos' 
+import { SafeAreaView } from 'react-native-safe-area-context';
 
  class Pedido_itens extends React.Component<any>{
    
    
   render() {
-    const { numero_mesa, image_on,name_on, id } = this.props.route.params;
-    const atualizar_pedido = () => {
-      this.props.navigation?.navigate('Pedidos')
-      this.props.onAtualizarPedido(id)
-    }
+       const { numero_mesa, image_on, name_on, id, ids, rua, numero, pegar_local,dinheiro,pix,cartao } = this.props.route.params;
+
+       const atualizar_pedido = () => {
+        this.props.onAtualizarPedido(id)
+        // this.props.navigation?.navigate('Pedidos')
+        this.props.navigation?.goBack()
+      }
     return(
     <SafeAreaView style={styles.container}>
      <ScrollView style={styles.scroll}>
       {/* header q recebe o numero se tiver image se tiver e name do user se tiver */}
-      <Header_pedido numero_mesa={numero_mesa} image_on={image_on} name_on={name_on}/>
+      <Header_pedido 
+      id={id}
+      ids={ids}
+      numero_mesa={numero_mesa} 
+      image_on={image_on} 
+      name_on={name_on} 
+      rua={rua}
+      numero={numero}
+      pegar_local={pegar_local}
+      dinheiro={dinheiro}
+      pix={pix}
+      cartao={cartao}
+      />
       {/*recebe o id depois faz um find em pedidos qual id === id_pedidos*/}
       <Lista id={id} /> 
       {/* botao para atualizar o status_$ do PEDIDO */}

@@ -1,7 +1,8 @@
 import React from 'react';
-import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { FlatList,  StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import Item_pedido from './Item_pedido';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 class Lista extends React.Component<any> {
   render() {

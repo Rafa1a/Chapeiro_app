@@ -12,7 +12,19 @@ export interface pedido_props {
     image_on      ?: string;
     name_on       ?: string;
     navigation ?: NavigationProp<any,any>;
+    ordem       ?:number
+    rua?:string,
+    numero?:string,
+    pegar_local?: boolean;
+    dinheiro?:number;
+    pix?:boolean;
+    cartao?:cartao;
 
+  }
+export interface cartao{
+    visa:boolean;
+    mastercard:boolean;
+    elo:boolean
   }
 export interface user_on{
   id            : string
@@ -30,15 +42,21 @@ export interface user_on{
     adicionar_p: string[];
   }
   export interface pedido_inter {
-    id:string,
+    id?:string,
     localidade: "MESA" | "ONLINE" | "OUTROS";
     status: boolean;
     numero_mesa?: number;
     id_user?: string;
-    rua?: string;
-    numero?: number;
-    pegar_local?: boolean;
     itens: Item[];
-    status_chapeiro:boolean
+    ordem:number
+    status_chapeiro?:boolean
+    status_porcoes?:boolean
+    status_bar?:boolean
+    pegar_local?: boolean;
+    rua?: string;
+    numero?: string;
+    dinheiro:number;
+    cartao:cartao;
+    pix:boolean;
   }
   

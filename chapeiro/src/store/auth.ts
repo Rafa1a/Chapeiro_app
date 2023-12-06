@@ -39,9 +39,9 @@ const firebaseOptions = {
 
 
 // const email = 'madrugao@com.br';
-// const email = 'chapeiro@chapeiro.com';
+const email = 'chapeiro@chapeiro.com';
 // const email = 'bar@bar.com';
-const email = 'porcoes@porcoes.com';
+// const email = 'porcoes@porcoes.com';
 // const password = 'gynxeq4wIii61855TmpX';
 const password = 'vNHEl0AJ3Ixppce8aOiy';
 // funcao de autenticacao

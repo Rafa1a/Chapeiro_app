@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import {  StyleSheet, Text } from 'react-native';
 import { Image, LinearProgress } from '@rneui/themed';
 
 import { auth_user } from '../store/auth';
 import { connect } from 'react-redux';
 import { startPedidosListener } from '../store/action/pedidos';
-import { fetchuser_get } from '../store/action/user';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { startUsers } from '../store/action/user';
 
 const Splash = ({ navigation,onFetchPedidos,onFetchUser,pedidos }: any) => {
 
@@ -66,13 +67,13 @@ const Splash = ({ navigation,onFetchPedidos,onFetchUser,pedidos }: any) => {
     if (loaded && loaded1 && pedidos !== undefined) {
     // adicionar os usuarios online q fizeram pedidos como nome image ect..
           setLoaded1(false)
-          navigation.navigate('Pedidos');
+          navigation.replace('Pedidos');
     }
   }, [pedidos]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image source={require('../assets/image/porcao_icone.png')} style={styles.image} />
+      <Image source={require('../assets/image/chapeiro_icone.png')} style={styles.image} />
       <Text style={styles.header}>Madrugão</Text>
       <LinearProgress
         style={{ marginVertical: 10 }}
@@ -111,7 +112,7 @@ const mapStateProps = ({ pedidos,  }: { pedidos: any; }) => {
 const mapDispatchProps = (dispatch: any) => {
   return {
     onFetchPedidos: () => dispatch(startPedidosListener()),
-    onFetchUser: () => dispatch(fetchuser_get()),
+    onFetchUser: () => dispatch(startUsers()),
     
   };
 };
