@@ -1,0 +1,107 @@
+import React, { useEffect } from 'react';
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import { fetchpedidos,startPedidosListener} from '../store/action/pedidos';
+import Pedido from '../components/Pedido'
+import { pedido_inter, user_on } from '../interface/inter';
+import { fetchuser_get } from '../store/action/user';
+import Header from '../components/Header_pedidos';
+import { NavigationProp } from '@react-navigation/native';
+
+interface Props {
+  pedidos: pedido_inter[];
+  onFetchPedidos: () => void;
+  onFetchUser: () => void;
+  name_on?: string;
+  image_on?:string;
+  status_chapeiro?:boolean;
+  users:user_on[];
+  navigation: NavigationProp<any,any>;
+}
+const Pedidos = ({ pedidos ,onFetchUser,onFetchPedidos,users,navigation }:Props) => {
+  
+  
+  
+  return (
+    <SafeAreaView style={styles.container}>
+      
+      <Header/>
+      
+      <FlatList
+        
+        data={pedidos}
+        //item ja retorna apenas os status_chapeiro de acordo com o back0end query
+        keyExtractor={item => `${item.id}`}
+        renderItem={({ item,index }) => {
+           
+            // condicoes para realizar a pesquisa e filtro sobre os resultados obtidos
+            if (item.localidade === 'MESA') {
+            
+              if(index === 0) {
+
+                return <Pedido id={item.id} key={item.id} styles numero_mesa={item.numero_mesa} navigation={navigation}/>;
+
+              }else return <Pedido id={item.id} key={item.id} numero_mesa={item.numero_mesa} navigation={navigation}/>;
+              
+            } else if (item.localidade === 'ONLINE') {
+              // se algum user tem um pedido id_user na lista de pedidos novos pega o nome e image
+              const currentUser = users.find(user => user.id === item.id_user);
+              const name = currentUser ? currentUser.name_on : 'Anonymo';
+              const image = currentUser ? currentUser.image_on : undefined;
+  
+              if(index === 0) {
+
+                return <Pedido id={item.id} key={item.id} styles name_on={name} image_on={image} navigation={navigation}/>;
+
+              }else return item.id_user ?  <Pedido id={item.id} key={item.id} name_on={name} image_on={image} navigation={navigation}/> :  <Pedido id={item.id} key={item.id} name_on='Anonymo' navigation={navigation} />
+             
+            } else if (item.localidade === 'OUTROS') {
+  
+              if(index === 0) {
+
+                return <Pedido id={item.id} key={item.id} styles name_on='Anonymo' navigation={navigation}/>;
+
+              }else return <Pedido id={item.id} key={item.id} name_on='Anonymo' navigation={navigation}/>;
+            } 
+          return null;
+        }}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
+      />
+      
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:'#202124',
+    width:"100%"
+  },
+  separator: {
+    height: 30,
+    width: '100%',
+    backgroundColor: 'transparent',
+  },
+  
+});
+
+const mapStateProps = ({ pedidos, user }: { pedidos: any; user: any }) => {
+  return {
+    pedidos: pedidos.pedidos,
+    users:user.users
+  };
+};
+
+
+const mapDispatchProps = (dispatch: any) => {
+  return {
+    onFetchPedidos: () => dispatch(startPedidosListener()),
+    onFetchUser: () => dispatch(fetchuser_get()),
+    
+  };
+};
+
+export default connect(mapStateProps, mapDispatchProps)(Pedidos);
