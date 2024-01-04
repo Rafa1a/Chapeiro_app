@@ -5,6 +5,7 @@ export interface actions {
 }
 export const initialState:any = {
     pedidos: undefined,
+    pedidos_itens: undefined,
   
     
 }

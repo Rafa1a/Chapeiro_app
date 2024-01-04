@@ -19,6 +19,9 @@ export interface pedido_props {
     dinheiro?:number;
     pix?:boolean;
     cartao?:cartao;
+    route?: any;
+
+    onPedido_itens?:(pedido_itens:any)=>void
 
   }
 export interface cartao{

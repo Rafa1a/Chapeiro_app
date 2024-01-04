@@ -3,9 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Pedidos from "../screens/Pedidos";
-import Pedido   from "../screens/Pedido_itens"
 import Splash from "../screens/Splash";
 import Updat from "../screens/Updates";
+import Pedido_itens from "../screens/Pedido_itens";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +21,7 @@ const FeedStack = (props:any) => {
 
       <Stack.Screen name="Pedidos" component={Pedidos} options={{headerShown:false}} {...props}/>
 
-      <Stack.Screen name="Pedido" component={Pedido}  {...props}/>
+      <Stack.Screen name="Pedido_itens" component={Pedido_itens}  {...props}/>
       
     </Stack.Navigator> 
   );

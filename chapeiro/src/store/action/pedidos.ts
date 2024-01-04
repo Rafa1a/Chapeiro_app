@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import {SET_PEDIDOS} from './actionTypes'
+import {SET_PEDIDOS, SET_PEDIDO_ITENS} from './actionTypes'
 import { Dispatch } from 'redux'
 //auth
 import { db } from '../auth';
@@ -57,6 +57,13 @@ export const fetchatualizar_pedido = (id:any) => {
 export const setPedidos =  (pedidos:any) => {
   return { 
       type:SET_PEDIDOS,
+      payload:pedidos
+  }
+
+}
+export const set_Pedido_Itens =  (pedidos:any) => {
+  return { 
+      type:SET_PEDIDO_ITENS,
       payload:pedidos
   }
 
