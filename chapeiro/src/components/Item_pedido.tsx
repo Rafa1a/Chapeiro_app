@@ -4,6 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { connect } from 'react-redux';
 
 const Item_pedido = (props) => {
+    // para lanches ou hotdogs
+    if(props.categoria === "bar" || props.categoria === "bebidas" || props.categoria_2 === "porcoes" ) { return }
+    //para bar
+    // if(props.categoria === "comidas" || props.categoria === "bebidas")  {return } 
+    //porcoes
+    // if(props.categoria === "bar" || props.categoria === "bebidas" || props.categoria_2 === "lanches" || props.categoria_2 === "hotdogs" ) { 
+    //     return 
+    // }  
   const { adicionar_p, retirar_p, name_p, quantidade } = props;
   const [possuiAdicionar, setPossuiAdicionar] = useState(null);
   const [possuiRetirar, setPossuiRetirar] = useState(null);
