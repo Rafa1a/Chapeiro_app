@@ -26,7 +26,7 @@ const Pedidos = ({ pedidos ,users,navigation }:Props) => {
       <Header/>
       
       <FlatList
-        
+        showsVerticalScrollIndicator={false}
         data={pedidos}
         //item ja retorna apenas os status_chapeiro de acordo com o back0end query
         keyExtractor={item => `${item.id}`}
