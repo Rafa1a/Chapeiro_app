@@ -23,6 +23,7 @@ export interface pedido_props {
 
     onPedido_itens?:(pedido_itens:any)=>void
 
+    itens?:Item[]
   }
 export interface cartao{
     visa:boolean;

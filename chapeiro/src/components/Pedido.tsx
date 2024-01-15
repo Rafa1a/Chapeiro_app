@@ -1,11 +1,12 @@
-import React from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Number from './Number';
 import { pedido_props } from '../interface/inter';
 import { connect } from 'react-redux';
 import { set_Pedido_Itens } from '../store/action/pedidos';
+import Flatlist_mini_lista from './Flatlist_mini_lista';
 
 const Pedido = (props: pedido_props) => {
 
@@ -71,31 +72,38 @@ const Pedido = (props: pedido_props) => {
       bottom: 5,
       right: 20,
     }} /> : null;
-
+  // mini lista do itens do pedido
+  const [itens, setItens] = React.useState(props.itens);
+  useEffect(() => {
+    console.log(props.itens)
+    const itens_bar_bebidas = props.itens.filter((item) => item.categoria === 'comidas' && (item.categoria_2 === 'lanches' || item.categoria_2 === 'hotdogs'));
+    setItens(itens_bar_bebidas);
+  }, [props.itens])
   return (
-    <SafeAreaView style={styles.containerM}>
-      <TouchableOpacity onPress={handlePress}>
+    <View style={styles.containerM}>
+      <TouchableOpacity onPress={handlePress} style={styles.containerM}>
         <View style={props.styles ? styles.containerindex0 : styles.container}>
           <View style={styles.content}>
             {userormesa}
             {username}
           </View>
           {icon_lanche}
-          {props.styles ? <View
-            style={{
-              position: 'absolute',
-              top: 56,
-              right: 25,
-              zIndex: 1,
-              backgroundColor: '#0000001a',
-              borderRadius: 25,
-              width: 50,
-              height: 15,
-            }}
-          /> : null}
+          
+        </View>
+        <View style={styles.container_lista_mini}>
+          <FlatList
+            data={itens}
+            renderItem={({ item }) =>(
+                <Flatlist_mini_lista item={item}/>
+
+            )}
+            keyExtractor={(item,index )=> index.toString()}
+            style={{width:'100%',height:'100%'}}
+            // ItemSeparatorComponent={() => <View style={{width:10}}/>}
+          />
         </View>
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -119,15 +127,17 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: Dimensions.get('window').width * 1 / 5.5,
     width: Dimensions.get('window').width / 1.29,
-    marginRight: '10%',
-    marginLeft: '10%',
+    // marginRight: '10%',
+    // marginLeft: '10%',
   },
   containerM: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: Dimensions.get('window').width * 1 / 5.5,
+
+
+    height: '100%',
     width: '100%',
   },
   content: {
@@ -147,6 +157,17 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   outros: {},
+  container_lista_mini: {
+    flex:1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#3C4043',
+    borderRadius: 10,
+    margin:10,
+    height:"100%",
+    width: "90%"
+  },
 });
 const mapDispatchProps = (dispatch: any) => {
   return {

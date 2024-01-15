@@ -37,9 +37,9 @@ const Pedidos = ({ pedidos ,users,navigation }:Props) => {
             
               if(index === 0) {
 
-                return <Pedido  id={item.id} key={item.id} styles numero_mesa={item.numero_mesa} navigation={navigation} />;
+                return <Pedido itens={item.itens}  id={item.id} key={item.id} styles numero_mesa={item.numero_mesa} navigation={navigation} />;
 
-              }else return <Pedido  id={item.id} key={item.id} numero_mesa={item.numero_mesa} navigation={navigation} />;
+              }else return <Pedido  itens={item.itens} id={item.id} key={item.id} numero_mesa={item.numero_mesa} navigation={navigation} />;
               
             } else if (item.localidade === 'ONLINE') {
               // se algum user tem um pedido id_user na lista de pedidos novos pega o nome e image
@@ -49,11 +49,11 @@ const Pedidos = ({ pedidos ,users,navigation }:Props) => {
   
               if(index === 0) {
 
-                return <Pedido id={item.id} key={item.id} styles name_on={name} image_on={image} navigation={navigation}/>;
+                return <Pedido itens={item.itens} id={item.id} key={item.id} styles name_on={name} image_on={image} navigation={navigation}/>;
 
               }else return item.id_user ?  
-              <Pedido id={item.id} key={item.id} name_on={name} image_on={image} navigation={navigation}/> :  
-              <Pedido id={item.id} key={item.id} name_on='Anonymo' navigation={navigation} />
+              <Pedido itens={item.itens} id={item.id} key={item.id} name_on={name} image_on={image} navigation={navigation}/> :  
+              <Pedido itens={item.itens} id={item.id} key={item.id} name_on='Anonymo' navigation={navigation} />
              
             } else if (item.localidade === 'OUTROS') {
   
@@ -61,6 +61,7 @@ const Pedidos = ({ pedidos ,users,navigation }:Props) => {
 
                 return (
                   <Pedido 
+                  itens={item.itens}
                    id={item.id?item.id:''} 
                    key={item.id} 
                    styles 
@@ -71,6 +72,7 @@ const Pedidos = ({ pedidos ,users,navigation }:Props) => {
 
               }else return (
               <Pedido 
+                itens={item.itens}
                 id={item.id?item.id:''} key={item.id} 
                 name_on='Anonymo' 
                 rua = {item.rua}
